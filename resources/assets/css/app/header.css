@@ -1,0 +1,10 @@
+.header_container {
+	background-color: #000;
+	height: 100px;
+	width: 100%;
+}
+
+.logo_image {
+	margin: 23px auto;
+	width: 15%;
+}
