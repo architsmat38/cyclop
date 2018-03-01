@@ -12,3 +12,5 @@
 */
 
 Route::get('/', 'EventsController@getEventsAndFilters');
+
+Route::post('/filter_events', 'EventsController@getFilteredEvents');

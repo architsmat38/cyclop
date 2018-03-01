@@ -7,22 +7,26 @@ use App\Event;
 
 class EventsController extends Controller {
 
+    public function formatEventsData($events) {
+        // Format events data
+        foreach ($events as &$event) {
+            $event->duration = round((strtotime($event->end_date) - strtotime($event->start_date)) / (60 * 60 * 24)) + 1;
+            if (date('y', strtotime($event->start_date)) == date('y', strtotime($event->end_date))) {
+                $event->start_date = date('d M', strtotime($event->start_date));
+            } else {
+                $event->start_date = date('d M \'y', strtotime($event->start_date));
+            }
+
+            $event->end_date = date('d M \'y', strtotime($event->end_date));
+            $event->distance_in_km = $event->distance / 1000;
+        }
+
+        return $events;
+    }
+
     public function getEvents() {
     	$events = Event::fetchEventDetails();
-
-    	// Format events data
-    	foreach ($events as &$event) {
-    		$event->duration = round((strtotime($event->end_date) - strtotime($event->start_date)) / (60 * 60 * 24)) + 1;
-    		if (date('y', strtotime($event->start_date)) == date('y', strtotime($event->end_date))) {
-    			$event->start_date = date('d M', strtotime($event->start_date));
-    		} else {
-    			$event->start_date = date('d M \'y', strtotime($event->start_date));
-    		}
-
-    		$event->end_date = date('d M \'y', strtotime($event->end_date));
-    		$event->distance_in_km = $event->distance / 1000;
-    	}
-
+        $events = self::formatEventsData($events);
     	return $events;
     }
 
@@ -32,5 +36,12 @@ class EventsController extends Controller {
         $filters = FiltersController::getAllFilters();
 
     	return view('events', ['events' => $events, 'quote' => $quote, 'filters' => $filters]);
+    }
+
+    public function getFilteredEvents(Request $request) {
+        $events = Event::fetchFilteredEventDetails($request->all());
+        $events = self::formatEventsData($events);
+        $filtered_events_html = view('events.main', ['events' => $events])->render();
+        return response()->json(array('success' => true, 'events_html' => $filtered_events_html));
     }
 }

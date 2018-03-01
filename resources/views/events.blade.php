@@ -7,7 +7,20 @@
 				@include('events.sidebar')
 			</div>
 			<div class='twelve wide column'>
-				@include('events.main')
+				<div class='ui segment'>
+					<h2 class='ui header'>
+						CYCLING EVENTS
+						<p class='sub header'>{{$quote}}</p>
+					</h2>
+				</div>
+				<div id='cycling_events_section'>
+					@include('events.main')
+				</div>
+				<div class='ui segment' id='initial_loading'>
+					<div class='ui active inverted dimmer'>
+						<div class='ui medium text loader'>Unleashing Happiness..!!</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

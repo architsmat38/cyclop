@@ -1,10 +1,3 @@
-<div class='ui segment'>
-	<h2 class='ui header'>
-		CYCLING EVENTS
-		<p class='sub header'>{{$quote}}</p>
-	</h2>
-</div>
-
 @if(count($events) > 0)
 	@foreach($events as $event)
 		<div class='ui segment'>
@@ -66,6 +59,6 @@
 	@endforeach
 @else
 	<div class='ui segment'>
-		<p class='text-center ptop20 pbot20'>No Upcoming Events Found. Stay Tuned!!</p>
+		<p class='text-center ptop30 pbot30'>No Events Found. Stay Tuned!!</p>
 	</div>
 @endif

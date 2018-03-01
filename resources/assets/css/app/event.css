@@ -5,3 +5,25 @@
 .event_filter_sidebar {
 	width: 100% !important;
 }
+
+.event_filter_remove_all {
+    float: right;
+    cursor: pointer;
+    color: blue;
+    font-weight: normal;
+    text-decoration: underline;
+    font-size: 80%;
+    opacity: 0.5;
+}
+
+.event_filter_remove_all:hover {
+	opacity: 1;
+}
+
+#cycling_events_section {
+	display: none;
+}
+
+#initial_loading {
+	min-height: 200px;
+}
