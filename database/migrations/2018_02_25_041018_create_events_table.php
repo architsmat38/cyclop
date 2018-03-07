@@ -16,8 +16,8 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->increments('event_id');
             $table->string('title');
-            $table->string('subtitle')->nullable($value = true);
-            $table->text('description')->nullable($value = true);
+            $table->string('subtitle');
+            $table->text('description');
             $table->date('start_date');
             $table->date('end_date');
             $table->time('start_time')->nullable($value = true);
@@ -27,6 +27,9 @@ class CreateEventsTable extends Migration
             $table->double('amount', 8, 2)->default(0.00);
             $table->unsignedInteger('start_city_id');
             $table->unsignedInteger('end_city_id');
+            $table->string('address');
+            $table->float('latitude', 10, 6);
+            $table->float('longitude', 10, 6);
             $table->unsignedInteger('terrain_id');
             $table->unsignedInteger('event_type_id')->nullable($value = true);
             $table->unsignedInteger('partner_id')->nullable($value = true);

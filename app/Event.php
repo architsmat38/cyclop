@@ -7,7 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class Event extends Model {
 
-	public static function fetchEventDetailsSql() {
+    /**
+     * Fetch all event details related sql
+     * This sql query fetches all event related information as well
+     */
+	public static function fetchAllEventDetailsSql() {
 		$sql = 'SELECT events.*,
 				terrains.`name` AS terrain_name, partners.`name` AS partner_name,
 				partners.`description` AS partner_description, partners.`url` AS partner_url,
@@ -29,16 +33,22 @@ class Event extends Model {
 		return $sql;
 	}
 
-    public static function fetchEventDetails() {
-    	$sql = self::fetchEventDetailsSql();
+    /**
+     * Fetch all event details
+     */
+    public static function fetchAllEventDetails() {
+    	$sql = self::fetchAllEventDetailsSql();
     	$sql .= ' ORDER BY start_date ASC ';
 
     	$events = DB::select($sql);
     	return $events;
     }
 
+    /**
+     * Fetch event details by applying the provided filters
+     */
     public static function fetchFilteredEventDetails($filters) {
-    	$sql = self::fetchEventDetailsSql();
+    	$sql = self::fetchAllEventDetailsSql();
 
     	foreach ($filters as $filter_type => $filter_values) {
     		$table_name = '';
@@ -95,5 +105,16 @@ class Event extends Model {
     	$sql .= ' ORDER BY start_date ASC ';
     	$events = DB::select($sql);
     	return $events;
+    }
+
+    /**
+     * Fetch event details by event id
+     */
+    public static function getEventDetailsById($event_id) {
+        $sql = self::fetchAllEventDetailsSql();
+        $sql .= ' AND events.`event_id` = ?';
+
+        $event_details = DB::select($sql, [$event_id])[0];
+        return $event_details;
     }
 }
