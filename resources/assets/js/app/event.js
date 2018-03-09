@@ -30,6 +30,14 @@ function remove(array, element) {
     }
 }
 
+function bindClickEvents() {
+	// Re-direction to event page
+	$('.event_snippet').off('click').on('click', function() {
+		var event_id = $(this).data('event_id');
+		window.location.href = "/event/" + event_id;
+	});
+}
+
 // Apply filters to event results
 function applyFilters(element) {
 	var checkbox_element = $(element).parents('.event_filter')[0];
@@ -194,6 +202,7 @@ function renderFilteredEvents() {
         success: function(response) {
             if (response.success) {
             	$('#cycling_events_section').html(response.events_html);
+            	bindClickEvents();
             } else {
             	// TODO :: ERROR HANDLING
             }
@@ -235,5 +244,6 @@ $(document).ready(function() {
     } else {
     	$('#initial_loading').hide();
     	$('#cycling_events_section').show();
+    	bindClickEvents();
     }
 });

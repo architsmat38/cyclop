@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<link rel='stylesheet' href='/css/app/event.css' />
 
 @section('content')
 	<div class='ui container mtop20'>

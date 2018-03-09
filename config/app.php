@@ -160,6 +160,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // Other service providers...
+        Anand\LaravelPaytmWallet\PaytmWalletServiceProvider::class,
+
     ],
 
     /*
@@ -208,6 +211,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        // Other aliases
+        'PaytmWallet' => Anand\LaravelPaytmWallet\Facades\PaytmWallet::class,
 
     ],
 

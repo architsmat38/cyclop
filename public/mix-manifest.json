@@ -3,6 +3,8 @@
     "/css/app.css": "/css/app.css",
     "/css/semantic.css": "/css/semantic.css",
     "/css/app/all.css": "/css/app/all.css",
+    "/css/app/event.css": "/css/app/event.css",
+    "/css/app/event_page.css": "/css/app/event_page.css",
     "/js/semantic.js": "/js/semantic.js",
     "/js/app/all.js": "/js/app/all.js"
 }

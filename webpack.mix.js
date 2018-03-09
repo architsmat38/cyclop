@@ -19,7 +19,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
    		'resources/assets/css/app/header.css',
    		'resources/assets/css/app/common.css',
    		'resources/assets/css/app/footer.css',
-   		'resources/assets/css/app/event.css'
    	], 'public/css/app/all.css')
+   .styles(['resources/assets/css/app/event.css'], 'public/css/app/event.css')
+   .styles(['resources/assets/css/app/event_page.css'], 'public/css/app/event_page.css')
    .scripts(['resources/assets/js/semantic.js'], 'public/js/semantic.js')
    .scripts(['resources/assets/js/app/event.js'], 'public/js/app/all.js');

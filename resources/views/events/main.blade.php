@@ -1,10 +1,9 @@
 @if(count($events) > 0)
 	@foreach($events as $event)
-		<div class='ui segment'>
+		<div class='ui segment event_snippet' data-event_id={{$event->event_id}}>
 			<div class='ui grid'>
 				<!-- Event Image -->
 				<div class='four wide column'>
-
 					<img class='event_card_image' src='{{ asset("images/events/event_{$event->event_id}.png") }}'>
 				</div>
 
@@ -14,7 +13,7 @@
 						<div class='eleven wide column'>
 							<h3 class='ui header'>
 								{{$event->title}}
-								<p class='sub header'>{{$event->description}}</p>
+								<p class='sub header'>{{$event->subtitle}}</p>
 							</h3>
 						</div>
 						<!-- Duration -->
@@ -34,31 +33,39 @@
 
 					<div class='ui grid mtop0'>
 						<!-- Amount -->
-						<div class='four wide column'>
+						<div class='three wide column'>
 							<p>{{$event->currency}} {{$event->amount}}</p>
 						</div>
 
 						<!-- Distance -->
-						<div class='four wide column'>
+						<div class='three wide column'>
 							<p>{{$event->distance_in_km}} KM</p>
 						</div>
 
 						<!-- Terrain -->
-						<div class='four wide column'>
+						<div class='three wide column'>
 							<p>{{$event->terrain_name}}</p>
 						</div>
 
 						<!-- Duration -->
-						<div class='four wide column'>
+						<div class='three wide column'>
 							<p>{{$event->duration}} @if($event->duration > 1) days @else day @endif</p>
 						</div>
+
+						<!-- Register Button -->
+						<div class='four wide column'>
+							<div class='ui tiny teal button register_button'>
+								Register
+							</div>
+						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
 	@endforeach
 @else
 	<div class='ui segment'>
-		<p class='text-center ptop30 pbot30'>No Events Found. Stay Tuned!!</p>
+		<p class='text-center ptop30 pbot30'>No Events Found ...!!</p>
 	</div>
 @endif
