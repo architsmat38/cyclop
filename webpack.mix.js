@@ -14,7 +14,10 @@ let mix = require('laravel-mix');
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css')
    .copyDirectory('resources/assets/css/themes', 'public/css/themes')
-   .styles(['resources/assets/css/semantic.css'], 'public/css/semantic.css')
+   .styles([
+      'resources/assets/css/semantic.css',
+      'resources/assets/css/components/calendar.css'
+   ], 'public/css/semantic.css')
    .styles([
    		'resources/assets/css/app/header.css',
    		'resources/assets/css/app/common.css',
@@ -22,5 +25,10 @@ mix.js('resources/assets/js/app.js', 'public/js')
    	], 'public/css/app/all.css')
    .styles(['resources/assets/css/app/event.css'], 'public/css/app/event.css')
    .styles(['resources/assets/css/app/event_page.css'], 'public/css/app/event_page.css')
-   .scripts(['resources/assets/js/semantic.js'], 'public/js/semantic.js')
-   .scripts(['resources/assets/js/app/event.js'], 'public/js/app/all.js');
+   .styles(['resources/assets/css/app/event_creation.css'], 'public/css/app/event_creation.css')
+   .scripts([
+      'resources/assets/js/semantic.js',
+      'resources/assets/js/components/calendar.js'
+   ], 'public/js/semantic.js')
+   .scripts(['resources/assets/js/app/event.js'], 'public/js/app/event.js')
+   .scripts(['resources/assets/js/app/event_creation.js'], 'public/js/app/event_creation.js');

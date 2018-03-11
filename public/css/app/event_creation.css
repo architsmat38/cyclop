@@ -1,0 +1,16 @@
+.create_event_button {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
+
+.note {
+	font-size: 12px !important;
+}
+
+#create-event-div {
+	display: none;
+}
+
+#auth_error {
+	display: none;
+}

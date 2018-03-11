@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Event;
 use App\TermsAndCondition;
+use App\City;
+use App\EventType;
+use App\Terrain;
+use App\Partner;
 
 class EventsController extends Controller {
 
@@ -17,7 +21,7 @@ class EventsController extends Controller {
         }
 
         $event->end_date = date('d M \'y', strtotime($event->end_date));
-        $event->distance_in_km = $event->distance / 1000;
+        $event->distance_in_km = round($event->distance / 1000);
 
         return $event;
     }
@@ -70,5 +74,22 @@ class EventsController extends Controller {
 
         $tnc_details = TermsAndCondition::getTnCByEventId($event_id);
         return view('event_page', ['event_details' => $event_details, 'tnc_details' => $tnc_details]);
+    }
+
+    /**
+     * Open up the page for the event creation
+     */
+    public function createEventPage() {
+        $cities = City::all();
+        $event_types = EventType::all();
+        $terrains = Terrain::all();
+        $partners = Partner::all();
+
+        return view('event_creation', [
+            'cities' => $cities,
+            'event_types' => $event_types,
+            'terrains' => $terrains,
+            'partners' => $partners
+        ]);
     }
 }

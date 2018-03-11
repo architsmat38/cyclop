@@ -14,8 +14,8 @@
 <div class='footer_container'>
 	<div class='footer_wrapper ui container'>
 		<div class='text-center ptop10'>
-			<span class='cursor-pointer mr10'><i class='ui footer envelope icon'></i></span>
-			<span class='cursor-pointer ml10'><i class='ui footer facebook f icon'></i></span>
+			<a class='mr10' href='mailto:archit.garg76@gmail.com'><i class='ui footer envelope icon'></i></a>
+			<a class='ml10' href='https://www.facebook.com/groups/CYCLOPBUYSELL/' target='_blank'><i class='ui footer facebook f icon'></i></a>
 		</div>
 		<div class='text-center color-white copyright-content ptop10'>
 			Copyright 2018 <i class='ui small footer copyright outline icon'></i> Archit Garg. &nbsp; All Rights Reserved.

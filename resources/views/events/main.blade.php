@@ -54,7 +54,7 @@
 
 						<!-- Register Button -->
 						<div class='four wide column'>
-							<div class='ui tiny teal button register_button'>
+							<div class='ui tiny teal button register_button style-button'>
 								Register
 							</div>
 						</div>

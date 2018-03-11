@@ -1,4 +1,9 @@
 @extends('layouts.app')
+<!-- Javascript -->
+@section('javascript')
+	<script type="text/javascript" src="/js/app/event.js"></script>
+@endsection
+
 <link rel='stylesheet' href='/css/app/event.css' />
 
 @section('content')

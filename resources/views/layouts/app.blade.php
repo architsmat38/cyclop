@@ -8,7 +8,7 @@
 
 	<script type="text/javascript" src="/js/app.js"></script>
 	<script type="text/javascript" src="/js/semantic.js"></script>
-	<script type="text/javascript" src="/js/app/all.js"></script>
+	@yield('javascript')
 </head>
 <body>
 	@include('includes.header')

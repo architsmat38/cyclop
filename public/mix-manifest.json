@@ -5,6 +5,8 @@
     "/css/app/all.css": "/css/app/all.css",
     "/css/app/event.css": "/css/app/event.css",
     "/css/app/event_page.css": "/css/app/event_page.css",
+    "/css/app/event_creation.css": "/css/app/event_creation.css",
     "/js/semantic.js": "/js/semantic.js",
-    "/js/app/all.js": "/js/app/all.js"
+    "/js/app/event.js": "/js/app/event.js",
+    "/js/app/event_creation.js": "/js/app/event_creation.js"
 }

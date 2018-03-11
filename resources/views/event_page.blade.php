@@ -45,18 +45,24 @@
 					<span>
 						{{$event_details->duration}} @if($event_details->duration > 1) days @else day @endif
 					</span>
+
+					<span class='event_brief_separator'>|</span>
+					<!-- Cost -->
+					<span class='color-black'>
+						{{$event_details->currency}} {{$event_details->amount}}
+					</span>
 				</div>
 			</div>
 
 			<!-- Register -->
 			<div class='four wide column text-center'>
-				<div class='ui teal button register_button'>
+				<div class='ui teal button register_button style-button'>
 					Register Now
 				</div>
 			</div>
 		</div>
 
-		<div class='text-right'>
+		<div class='text-right share-icons'>
 			<span class='facebook-share cursor-pointer'><i class='ui share large facebook icon'></i></span>
 			<span class='twitter-share cursor-pointer'><i class='ui share large twitter icon'></i></span>
 		</div>

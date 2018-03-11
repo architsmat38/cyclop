@@ -21,8 +21,6 @@
 
 .register_button {
 	float: right;
-	border-radius: 2px !important;
-	box-shadow: 0px 0px 10px 2px #ccc !important;
 	padding-left: 40px !important;
 	padding-right: 40px !important;
 	margin: 12px 0 !important;
@@ -44,4 +42,8 @@
 
 .icon.facebook.share {
 	color: rgb(59, 89, 152);
+}
+
+.share-icons {
+	margin-right: 50px;
 }
