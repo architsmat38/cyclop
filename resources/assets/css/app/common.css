@@ -1,6 +1,6 @@
-* {
+/** {
 	font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", "sans-serif" !important;
-}
+}*/
 
 body {
 	background-color: #F3F3F3;
@@ -160,4 +160,12 @@ body {
 
 .text-left {
 	text-align: left !important;
+}
+
+.cursor-pointer {
+	cursor: pointer !important;
+}
+
+.color-white {
+	color: #fff !important;
 }

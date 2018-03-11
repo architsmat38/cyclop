@@ -1,6 +1,6 @@
 .footer_container {
 	background-color: #000;
-	height: 50px;
+	height: 70px;
 	width: 100%;
 }
 
@@ -8,4 +8,12 @@
 	margin-bottom: 0 !important;
 	font-size: 12px !important;
 	padding: 5px !important;
+}
+
+.ui.icon.footer.facebook, .ui.icon.footer.copyright, .ui.icon.footer.envelope {
+	color: #fff;
+}
+
+.copyright-content {
+	font-size: 10px;
 }

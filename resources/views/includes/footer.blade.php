@@ -14,8 +14,11 @@
 <div class='footer_container'>
 	<div class='footer_wrapper ui container'>
 		<div class='text-center ptop10'>
-			<i class='white big envelope outline icon mr10'></i>
-			<i class='white big facebook f icon ml10'></i>
+			<span class='cursor-pointer mr10'><i class='ui footer envelope icon'></i></span>
+			<span class='cursor-pointer ml10'><i class='ui footer facebook f icon'></i></span>
+		</div>
+		<div class='text-center color-white copyright-content ptop10'>
+			Copyright 2018 <i class='ui small footer copyright outline icon'></i> Archit Garg. &nbsp; All Rights Reserved.
 		</div>
 	</div>
 </div>

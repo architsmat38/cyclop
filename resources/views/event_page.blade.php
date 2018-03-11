@@ -55,6 +55,11 @@
 				</div>
 			</div>
 		</div>
+
+		<div class='text-right'>
+			<span class='facebook-share cursor-pointer'><i class='ui share large facebook icon'></i></span>
+			<span class='twitter-share cursor-pointer'><i class='ui share large twitter icon'></i></span>
+		</div>
 	</div>
 </div>
 
@@ -105,17 +110,17 @@
 
 <!-- Load Google Maps -->
 <script>
-  function initMap() {
-    var uluru = {lat: {{$event_details->latitude}}, lng: {{$event_details->longitude}}};
-    var map = new google.maps.Map(document.getElementById('venue_map'), {
-      zoom: 15,
-      center: uluru
-    });
-    var marker = new google.maps.Marker({
-      position: uluru,
-      map: map
-    });
-  }
+  	function initMap() {
+	    var uluru = {lat: {{$event_details->latitude}}, lng: {{$event_details->longitude}}};
+	    var map = new google.maps.Map(document.getElementById('venue_map'), {
+	      zoom: 15,
+	      center: uluru
+	    });
+	    var marker = new google.maps.Marker({
+	      position: uluru,
+	      map: map
+	    });
+  	}
 </script>
 <script async defer
 	src="https://maps.googleapis.com/maps/api/js?key={{config('google-maps.api_key')}}&callback=initMap">
