@@ -16,4 +16,5 @@ Route::get('/event/{event_id}', 'EventsController@getEventPageDetails');
 Route::get('/create_event', 'EventsController@createEventPage');
 
 Route::post('/filter_events', 'EventsController@getFilteredEvents');
+Route::post('/create_events/preauth', 'AuthController@checkIfAuthCookieIsValid');
 Route::post('/create_events/auth', 'AuthController@checkCreateEventAuth');

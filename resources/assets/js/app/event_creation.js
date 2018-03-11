@@ -2,6 +2,10 @@ String.prototype.isEmpty = function() {
 	return (this.length === 0 || !this.trim());
 };
 
+/**
+ * Bind click event for the auth modal
+ * Includes submission of auth
+ */
 function bindClickEventsForAuthModal() {
 	$('#submit-auth').off('click').on('click', function() {
 		var auth_pass = $("input[name=auth-password]").val();
@@ -34,10 +38,39 @@ function bindClickEventsForAuthModal() {
 	});
 }
 
+/**
+ * Check if auth entered is still valid
+ */
+function checkIfAuthIsStillValid() {
+	$.ajax({
+        type: "POST",
+        url: "/create_events/preauth",
+        success: function(response) {
+            if (response.success) {
+            	$('#create-event-div').show();
+            } else {
+            	// Open auth modal
+			  	$('#auth-modal').modal({
+			  		onVisible: function() {
+			  			bindClickEventsForAuthModal();
+			  		},
+			  		onApprove: function() {
+			  			return false;
+			  		}
+			  	}).modal('setting', 'closable', false).modal('show');
+            }
+        }
+    });
+}
+
+/**
+ * Load and bind events once the form is loaded properly
+ */
 $(document).ready(function() {
 	$('.ui.dropdown').dropdown();
 	$('.ui.checkbox').checkbox();
 
+	// Calendar events
 	var today = new Date();
 	$('#event-start-date').calendar({
 		type: 'date',
@@ -82,13 +115,6 @@ $(document).ready(function() {
 	    }
   	});
 
-  	// Open auth modal
-  	$('#auth-modal').modal({
-  		onVisible: function() {
-  			bindClickEventsForAuthModal();
-  		},
-  		onApprove: function() {
-  			return false;
-  		}
-  	}).modal('setting', 'closable', false).modal('show');
+  	// Check if auth is still valid
+  	checkIfAuthIsStillValid();
 });
