@@ -92,4 +92,78 @@ class EventsController extends Controller {
             'partners' => $partners
         ]);
     }
+
+    /**
+     * Open up the page to edit the existing event
+     */
+    public function editEventPage(Request $request, $event_id) {
+        $cities = City::all();
+        $event_types = EventType::all();
+        $terrains = Terrain::all();
+        $partners = Partner::all();
+        $event_details = Event::getEventDetailsById($event_id);
+
+        return view('event_creation', [
+            'cities' => $cities,
+            'event_types' => $event_types,
+            'terrains' => $terrains,
+            'partners' => $partners,
+            'event_details' => $event_details
+        ]);
+    }
+
+    /**
+     * Validate event details
+     */
+    public function validateEventDetails(Request $request) {
+        $event_details = $request->all();
+
+        if (empty($event_details['title']) || empty($event_details['subtitle']) ||
+            empty($event_details['description']) || empty($event_details['start_date']) ||
+            empty($event_details['end_date']) || empty($event_details['distance']) ||
+            !isset($event_details['amount']) ||
+            empty($event_details['start_city_id']) || empty($event_details['end_city_id']) ||
+            empty($event_details['terrain_id']) || empty($event_details['event_type_id']) ||
+            !isset($event_details['cycle_available']) || empty($event_details['address']) ||
+            empty($event_details['latitude']) || empty($event_details['longitude'])) {
+            return false;
+        }
+
+        if (!is_numeric($event_details['distance']) || !is_numeric($event_details['amount']) ||
+            !is_numeric($event_details['start_city_id']) || !is_numeric($event_details['end_city_id']) ||
+            !is_numeric($event_details['terrain_id']) || !is_numeric($event_details['event_type_id']) ||
+            !is_numeric($event_details['latitude']) || !is_numeric($event_details['longitude'])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Create event
+     */
+    public function createEvent(Request $request) {
+        $response = array('success' => false, 'message' => '');
+
+        if ($this->validateEventDetails($request)) {
+            // Create event once the details are all valid
+            $details = $request->all();
+            $event_obj = Event::initWithData($details);
+            $event_id = $event_obj->create();
+
+            if ($event_id) {
+                // Upload Images
+                move_uploaded_file($details['thumbnail-image']->path(), public_path() . '/images/events/event_' . $event_id . '.png'); 
+                move_uploaded_file($details['cover-image']->path(), public_path() . '/images/event_page/event_page_' . $event_id . '.png');
+
+                $response['success'] = true;
+                $response['message'] = "Event has been created successfully.";
+                $response['event_id'] = $event_id;
+            }
+        } else {
+            $response['message'] = 'Event details are not valid.';
+        }
+
+        return response()->json($response);
+    }
 }

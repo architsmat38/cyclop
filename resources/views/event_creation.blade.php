@@ -10,13 +10,33 @@
 	<!-- Event creation div -->
 	<div class='ui segment' id='create-event-div'>
 		<div class='ui container'>
-			<div class='ui large header mbot10'>
-				Create Event
-			</div>
+			@if (empty($event_details))
+				<!-- Create event -->
+				<div class='ui large dividing header mbot10'>
+					Create Event
+				</div>
+			@else
+				<!-- Edit event -->
+				<div class='ui large dividing header mbot10'>
+					Edit Event
+				</div>
+
+				<div class='ui large blue label'>
+					<i class='ui bicycle icon'></i>
+					Event id: {{ $event_details->event_id }}
+				</div>
+				<br>
+
+				<div id='edit_event_details' class='display-none'
+				@foreach($event_details as $key => $value)
+					data-{{ $key }}="{{ $value }}"
+				@endforeach
+				></div>
+			@endif
 			<br>
 
 			<!-- Event creation form -->
-			<form class='ui form' id='create-event-form'>
+			<form class='ui form' id='create-event-form' onsubmit="event.preventDefault();">
 				<div class='ui dividing header'>Basic Information</div>
 
 				<!-- Basic Info -->
@@ -58,13 +78,21 @@
 							</div>
 						</div>
 					</div>
+
+					<div class='one wide field'></div>
+
+					<!-- Amount -->
+					<div class='required four wide field'>
+						<label>Amount (INR)</label>
+						<input type='number' placeholder='Amount' name='event-amount' value='0'>
+					</div>
 				</div>
 
-				<!-- City -->
 				<div class='three fields'>
+					<!-- City -->
 					<div class='required four wide field'>
 						<label>Start City</label>
-						<select class="ui fluid dropdown" name='event-start-city'>
+						<select class="ui fluid dropdown" name='event-start-city' id='event-start-city'>
 							<option value="">Select starting point</option>
     						@foreach($cities as $city)
     							<option value="{{$city->city_id}}">{{$city->name}}</option>
@@ -76,7 +104,7 @@
 
 					<div class='required four wide field'>
 						<label>End City</label>
-						<select class="ui fluid dropdown" name='event-end-city'>
+						<select class="ui fluid dropdown" name='event-end-city' id='event-end-city'>
 							<option value="">Select destination point</option>
     						@foreach($cities as $city)
     							<option value="{{$city->city_id}}">{{$city->name}}</option>
@@ -92,6 +120,27 @@
 						<input type='number' placeholder='Distance' name='event-distance'>
 					</div>
 				</div>
+
+				<!-- Event Images -->
+				<div class='two fields'>
+					<div class='required four wide field'>
+						<label>Thumbnail Image</label>
+						<div class='ui left icon input'>
+							<input type="file" name="tb-file" id="tb-file" accept=".png" required/>
+							<i class="upload icon"></i>
+						</div>
+					</div>
+
+					<div class='one wide field'></div>
+
+					<div class='required four wide field'>
+						<label>Cover Image</label>
+						<div class='ui left icon input'>
+							<input type="file" name="cv-file" id="cv-file" accept=".png" required/>
+							<i class="upload icon"></i>
+						</div>
+					</div>
+				</div>
 				<br>
 
 				<div class='ui dividing header'>Extra Information</div>
@@ -100,7 +149,7 @@
 					<!-- Terrain -->
 					<div class='required four wide field'>
 						<label>Terrain Type</label>
-						<select class="ui fluid dropdown" name='event-terrain'>
+						<select class="ui fluid dropdown" name='event-terrain' id='event-terrain'>
 							<option value="">Select terrain type</option>
 							@foreach($terrains as $terrain)
     							<option value="{{$terrain->terrain_id}}">{{$terrain->name}}</option>
@@ -113,7 +162,7 @@
 					<!-- Event type -->
 					<div class='required four wide field'>
 						<label>Event Type</label>
-						<select class="ui fluid dropdown" name='event-type'>
+						<select class="ui fluid dropdown" name='event-type' id='event-type'>
 							<option value="">Select event type</option>
 							@foreach($event_types as $event_type)
     							<option value="{{$event_type->event_type_id}}">{{$event_type->event_type}}</option>
@@ -125,7 +174,7 @@
 
 					<div class="field">
 						<label>Can individual get cycle from organizers?</label>
-					    <div class="ui checkbox mtop10">
+					    <div class="ui checkbox mtop10" id='event-cycle-available'>
 					    	<input type="checkbox" tabindex="0" class="hidden" name='event-cycle-available'>
 					      	<label>Yes, cycle is available</label>
 					    </div>
@@ -156,7 +205,7 @@
 				</div>
 				<br>
 
-				<div class='ui teal submit button create_event_button style-button'>Create Event</div>
+				<div class='ui teal submit button create_event_button style-button' id='submit-event'>Create Event</div>
 				<div class="ui error message"></div>
 			</form>
 		</div>

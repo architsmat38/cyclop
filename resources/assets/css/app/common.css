@@ -178,3 +178,11 @@ body {
 	border-radius: 2px !important;
     box-shadow: 0px 0px 10px 2px #ccc !important;
 }
+
+.display-block {
+	display: block !important;
+}
+
+.display-none {
+	display: none !important;
+}

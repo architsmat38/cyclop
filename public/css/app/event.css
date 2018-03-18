@@ -1,5 +1,6 @@
 .event_card_image {
-	width: 100%;
+	width: 180px;
+    height: 125px;
 }
 
 .event_filter_sidebar {
