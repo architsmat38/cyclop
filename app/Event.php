@@ -10,7 +10,8 @@ class Event extends Model {
 
     public function __construct(int $event_id = 0) {
         if ($event_id) {
-            $this->data = self::getEventDetailsById($event_id);
+            $event_details = self::getEventDetailsById($event_id);
+            $this->data = json_decode(json_encode($event_details), true);
         } else {
             $this->data = array();
         }
@@ -25,6 +26,17 @@ class Event extends Model {
 
     public function __set($name, $value) {
         $this->data[$name] = $value;
+    }
+
+    /**
+     * Fetch event details by event id
+     */
+    public static function getEventDetailsById($event_id) {
+        $sql = self::fetchAllEventDetailsSql();
+        $sql .= ' AND events.`event_id` = ?';
+
+        $event_details = DB::select($sql, [$event_id])[0];
+        return $event_details;
     }
 
     /**
@@ -55,7 +67,7 @@ class Event extends Model {
     /**
      * Create a new event
      */
-    public function create() {
+    public function createEvent() {
         $event_id = self::insertGetId(
             array(
                 'title' => $this->title,
@@ -81,14 +93,92 @@ class Event extends Model {
     }
 
     /**
-     * Fetch event details by event id
+     * Update existing event
      */
-    public static function getEventDetailsById($event_id) {
-        $sql = self::fetchAllEventDetailsSql();
-        $sql .= ' AND events.`event_id` = ?';
+    public function updateEvent($event_details) {
+        $event_id = $this->event_id;
+        $new_event_obj = self::initWithData($event_details);
 
-        $event_details = DB::select($sql, [$event_id])[0];
-        return $event_details;
+        // Check which parameter needs to be updated
+        $updates = array();
+        // Title
+        if ($this->title != $new_event_obj->title) {
+            $updates['title'] = $new_event_obj->title;
+        }
+
+        // Subtitle
+        if ($this->subtitle != $new_event_obj->subtitle) {
+            $updates['subtitle'] = $new_event_obj->subtitle;
+        }
+
+        // Description
+        if ($this->description != $new_event_obj->description) {
+            $updates['description'] = $new_event_obj->description;
+        }
+
+        // Start date
+        if ($this->start_date != $new_event_obj->start_date) {
+            $updates['start_date'] = $new_event_obj->start_date;
+        }
+
+        // End date
+        if ($this->end_date != $new_event_obj->end_date) {
+            $updates['end_date'] = $new_event_obj->end_date;
+        }
+
+        // Distance
+        if ($this->distance != $new_event_obj->distance) {
+            $updates['distance'] = $new_event_obj->distance;
+        }
+
+        // Amount
+        if ($this->amount != $new_event_obj->amount) {
+            $updates['amount'] = $new_event_obj->amount;
+        }
+
+        // Start city id
+        if ($this->start_city_id != $new_event_obj->start_city_id) {
+            $updates['start_city_id'] = $new_event_obj->start_city_id;
+        }
+
+        // End city id
+        if ($this->end_city_id != $new_event_obj->end_city_id) {
+            $updates['end_city_id'] = $new_event_obj->end_city_id;
+        }
+
+        // Address
+        if ($this->address != $new_event_obj->address) {
+            $updates['address'] = $new_event_obj->address;
+        }
+
+        // Latitude
+        if ($this->latitude != $new_event_obj->latitude) {
+            $updates['latitude'] = $new_event_obj->latitude;
+        }
+
+        // Longitude
+        if ($this->longitude != $new_event_obj->longitude) {
+            $updates['longitude'] = $new_event_obj->longitude;
+        }
+
+        // Terrain id
+        if ($this->terrain_id != $new_event_obj->terrain_id) {
+            $updates['terrain_id'] = $new_event_obj->terrain_id;
+        }
+
+        // Event type id
+        if ($this->event_type_id != $new_event_obj->event_type_id) {
+            $updates['event_type_id'] = $new_event_obj->event_type_id;
+        }
+
+        // Cycle Available
+        if ($this->cycle_available != $new_event_obj->cycle_available) {
+            $updates['cycle_available'] = $new_event_obj->cycle_available;
+        }
+
+        $update_status = self::where('event_id', $event_id)->update($updates);
+
+        return ($update_status ? $event_id : 0);
     }
 
     /**

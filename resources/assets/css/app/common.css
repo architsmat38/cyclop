@@ -6,6 +6,7 @@ body {
 	background-color: #F3F3F3;
 }
 
+/* Margin */
 .mtop0 {
 	margin-top: 0px !important;
 }
@@ -78,6 +79,8 @@ body {
 	margin-right: 30px !important;
 }
 
+
+/* Padding */
 .ptop0 {
 	padding-top: 0px !important;
 }
@@ -150,6 +153,7 @@ body {
 	padding-right: 30px !important;
 }
 
+/* Text Alignment */
 .text-center {
 	text-align: center !important;
 }
@@ -174,6 +178,10 @@ body {
 	color: #000 !important;
 }
 
+.color-gray {
+	color: gray !important;
+}
+
 .style-button {
 	border-radius: 2px !important;
     box-shadow: 0px 0px 10px 2px #ccc !important;
@@ -185,4 +193,8 @@ body {
 
 .display-none {
 	display: none !important;
+}
+
+.font-small {
+	font-size: 12px !important;
 }

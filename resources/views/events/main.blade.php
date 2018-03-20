@@ -60,6 +60,13 @@
 						</div>
 					</div>
 
+					@if ($event->cycle_available)
+						<div>
+							<i class='ui green bicycle icon' data-content='Cycle is available'></i>
+							<span class='font-small color-gray'>Cycle Available</span>
+						</div>
+					@endif
+
 				</div>
 			</div>
 		</div>

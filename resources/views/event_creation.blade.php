@@ -19,9 +19,13 @@
 				<!-- Edit event -->
 				<div class='ui large dividing header mbot10'>
 					Edit Event
+					<div class='ui basic mini blue right floated button' id='create_new_event'>
+						<i class="icon plus"></i>
+						Create New Event
+					</div>
 				</div>
 
-				<div class='ui large blue label'>
+				<div class='ui large blue label' id='edit_event_label' data-event_id='{{ $event_details->event_id }}'>
 					<i class='ui bicycle icon'></i>
 					Event id: {{ $event_details->event_id }}
 				</div>
@@ -205,7 +209,13 @@
 				</div>
 				<br>
 
-				<div class='ui teal submit button create_event_button style-button' id='submit-event'>Create Event</div>
+				<div class='ui teal submit button create_event_button style-button' id='submit-event'>
+					@if (empty($event_details))
+						Create Event
+					@else
+						Edit Event
+					@endif
+				</div>
 				<div class="ui error message"></div>
 			</form>
 		</div>

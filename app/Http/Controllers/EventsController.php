@@ -140,26 +140,81 @@ class EventsController extends Controller {
     }
 
     /**
-     * Create event
+     * Create new event
      */
-    public function createEvent(Request $request) {
+    private function createEvent($details) {
+        $event_obj = Event::initWithData($details);
+        $event_id = $event_obj->createEvent();
+
+        if ($event_id) {
+            // Upload Images
+            move_uploaded_file($details['thumbnail-image']->path(), public_path() . '/images/events/event_' . $event_id . '.png');
+            move_uploaded_file($details['cover-image']->path(), public_path() . '/images/event_page/event_page_' . $event_id . '.png');
+        }
+
+        return $event_id;
+    }
+
+    /**
+     * Edit existing event
+     */
+    public function editEvent($details) {
+        $event_obj = new Event($details['event_id']);
+        $event_id = $event_obj->updateEvent($details);
+
+        if ($event_id) {
+            // Upload Images
+            // Thumbnail Image
+            if (!empty($details['thumbnail-image']) && !is_string($details['thumbnail-image'])) {
+                move_uploaded_file(
+                    $details['thumbnail-image']->path(),
+                    public_path() . '/images/events/event_' . $event_id . '.png'
+                );
+            }
+
+            // Cover Image
+            if (!empty($details['cover-image']) && !is_string($details['cover-image'])) {
+                move_uploaded_file(
+                    $details['cover-image']->path(),
+                    public_path() . '/images/event_page/event_page_' . $event_id . '.png'
+                );
+            }
+        }
+
+        return $event_id;
+    }
+
+    /**
+     * Create/Edit event details
+     */
+    public function saveEventDetails(Request $request) {
         $response = array('success' => false, 'message' => '');
 
+        // Validate request details for event
         if ($this->validateEventDetails($request)) {
-            // Create event once the details are all valid
+
             $details = $request->all();
-            $event_obj = Event::initWithData($details);
-            $event_id = $event_obj->create();
+            if (empty($details['event_id'])) {
+                // Create event
+                $event_id = $this->createEvent($details);
 
-            if ($event_id) {
-                // Upload Images
-                move_uploaded_file($details['thumbnail-image']->path(), public_path() . '/images/events/event_' . $event_id . '.png'); 
-                move_uploaded_file($details['cover-image']->path(), public_path() . '/images/event_page/event_page_' . $event_id . '.png');
+                if ($event_id) {
+                    $response['success'] = true;
+                    $response['message'] = "Event has been created successfully.";
+                    $response['event_id'] = $event_id;
+                }
 
-                $response['success'] = true;
-                $response['message'] = "Event has been created successfully.";
-                $response['event_id'] = $event_id;
+            } else {
+                // Edit event
+                $event_id = $this->editEvent($details);
+
+                if ($event_id) {
+                    $response['success'] = true;
+                    $response['message'] = "Event has been edited successfully.";
+                    $response['event_id'] = $event_id;
+                }
             }
+
         } else {
             $response['message'] = 'Event details are not valid.';
         }

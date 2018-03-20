@@ -19,4 +19,4 @@ Route::get('/create_event/{event_id}', 'EventsController@editEventPage');
 Route::post('/filter_events', 'EventsController@getFilteredEvents');
 Route::post('/create_events/preauth', 'AuthController@checkIfAuthCookieIsValid');
 Route::post('/create_events/auth', 'AuthController@checkCreateEventAuth');
-Route::post('/create_events/create', 'EventsController@createEvent');
+Route::post('/create_events/create', 'EventsController@saveEventDetails');

@@ -51,6 +51,11 @@
 					<span class='color-black'>
 						{{$event_details->currency}} {{$event_details->amount}}
 					</span>
+
+					@if ($event_details->cycle_available)
+						<span class='event_brief_separator'>|</span>
+						<i class='ui green bicycle icon' data-content='Cycle is available'></i>
+					@endif
 				</div>
 			</div>
 
@@ -62,6 +67,7 @@
 			</div>
 		</div>
 
+		<!-- Cycle Available -->
 		<div class='text-right share-icons'>
 			<span class='facebook-share cursor-pointer'><i class='ui share large facebook icon'></i></span>
 			<span class='twitter-share cursor-pointer'><i class='ui share large twitter icon'></i></span>

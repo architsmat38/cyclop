@@ -40,7 +40,7 @@ class AuthController extends Controller {
 
     		$cookie_name = self::CREATE_EVENT_AUTH_COOKEY_KEY;
 			$cookie_value = md5($auth_pass . $auth_salt);
-			setcookie($cookie_name, $cookie_value, time() + (60 * 60), "/");	// 1 hour
+			setcookie($cookie_name, $cookie_value, time() + (24 * 60 * 60), "/");	// 1 day
     	}
 
     	return response()->json($response);

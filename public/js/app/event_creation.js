@@ -71,6 +71,13 @@ function checkIfAuthIsStillValid() {
  * Create/Edit event based on the mentioned details
  */
 function createEditEvent() {
+
+	var event_id = 0;
+	if ($('#edit_event_label').length != 0) {
+		// Case of edit event
+		event_id = $('#edit_event_label').data('event_id');
+	}
+
  	// Basic information
  	var title = $("input[name=event-title]").val();
  	var subtitle = $("input[name=event-subtitle]").val();
@@ -98,6 +105,7 @@ function createEditEvent() {
 
  	// Form data
  	var form_data = new FormData();
+ 	form_data.append('event_id', event_id);
  	form_data.append('title', title);
  	form_data.append('subtitle', subtitle);
  	form_data.append('description', description);
@@ -230,6 +238,11 @@ $(document).ready(function() {
 	    onSuccess: function(event, fields) {
 	    	createEditEvent();
 	    }
+  	});
+
+  	// Create new event redirection page
+  	$('#create_new_event').off('click').on('click', function() {
+  		window.location.href = '/create_event';
   	});
 
   	// Pre-fill fields in case of edit event
